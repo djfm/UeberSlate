@@ -1,0 +1,15 @@
+<div class='row' onclick="javascript:window.location='<%= send "#{underscore object.class}_path", object %>';">
+	
+	<% fields.each_with_index do |field, i| %>
+		<% unless empty=field.to_s.strip.empty? and i == fields.length - 1%>
+			<div class='row-contents <%= classes[i] %>'>
+				<%= unless empty then field else "&nbsp".html_safe end %>
+			</div>
+		<% end %>
+	<% end %>
+	<div class='row-controls'>
+		<div class='edit'><a href='<%= send "edit_#{underscore object.class}_path", object %>'><img src='/assets/edit.png'/></a></div>
+		<div class='destroy'><a href='<%= send "#{underscore object.class}_path", object %>?redirect=<%= request.fullpath %>' data-confirm='are you sure???' data-method='delete'><img src='/assets/delete.png'/></a></div>
+	</div>
+	<div class='clear'></div>
+</div>

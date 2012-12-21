@@ -1,0 +1,9 @@
+<h1>Listing sources</h1>
+
+<% @sources.each do |source| %>
+  <%= row source, :fields => :name%>
+<% end %>
+
+<br />
+
+<%= link_to 'New Source', new_source_path %>

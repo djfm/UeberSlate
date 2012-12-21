@@ -1,0 +1,41 @@
+<%= form_for(@storage) do |f| %>
+  <% if @storage.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@storage.errors.count, "error") %> prohibited this storage from being saved:</h2>
+
+      <ul>
+      <% @storage.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :pack_id %><br />
+    <%= f.number_field :pack_id %>
+  </div>
+  <div class="field">
+    <%= f.label :message_id %><br />
+    <%= f.number_field :message_id %>
+  </div>
+  <div class="field">
+    <%= f.label :storage_method %><br />
+    <%= f.text_field :storage_method %>
+  </div>
+  <div class="field">
+    <%= f.label :storage_path %><br />
+    <%= f.text_field :storage_path %>
+  </div>
+  <div class="field">
+    <%= f.label :storage_category %><br />
+    <%= f.text_field :storage_category %>
+  </div>
+  <div class="field">
+    <%= f.label :storage_custom %><br />
+    <%= f.text_field :storage_custom %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

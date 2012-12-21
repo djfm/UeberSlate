@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @function.user_id %>
+</p>
+
+<p>
+  <b>Role:</b>
+  <%= @function.role_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_function_path(@function) %> |
+<%= link_to 'Back', functions_path %>

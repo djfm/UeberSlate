@@ -1,0 +1,18 @@
+<p>
+  <b>Name:</b>
+  <%= @project.name %>
+</p>
+
+<p>
+  <b>Version:</b>
+  <%= @project.version %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%= @project.comment %>
+</p>
+
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

@@ -1,0 +1,128 @@
+// Place all the styles related to the Packs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.group
+{
+  border:1px solid #ccc;
+  border-radius:4px;
+  background-color:#fdfdff;
+  margin:2px;
+}
+
+fieldset.jump
+{
+  background-color:rgba(255,255,255,0.5);
+  border: 1px solid #ccc;
+  border-radius:5px;
+}
+
+legend
+{
+  border: 1px solid #ccc;
+  background-color:#fefefe;
+}
+
+div.translations
+{
+  
+}
+
+div.string
+{
+  float:left;
+  width:400px;
+}
+
+div.string iframe
+{
+  width:600px;
+  height:600px;
+}
+
+div.message pre
+{
+  width:580px;
+  white-space: pre-wrap;
+  margin: 0px;
+}
+
+table.mceLayout
+{
+  width:600;
+  height:600;
+}
+
+div.translation
+{
+  float:right;
+}
+
+textarea.translation
+{
+  float:left;
+  width:556px;
+  color: #333;
+  border:1px solid #ccc;
+  margin-bottom:5px;
+}
+
+div.string_translation
+{
+  float:left;
+}
+
+div.control
+{
+  float:right;
+  margin:5px;
+}
+
+table.stats
+{
+}
+
+td.stat
+{
+  text-align:center;
+  border:1px solid rgba(100,100,100,0.5);
+}
+
+span.stat
+{
+  font-weight:bold;
+}
+
+span.stat_details
+{
+  font-size:0.8em;
+  color:black;
+}
+
+td.stat
+{
+  text-align:center;
+  &:hover
+  {
+    cursor:pointer;
+    border:1px solid #666;
+  }
+}
+
+div.pack_name
+{
+  width:200px;
+}
+
+div.pack_project
+{
+  width:200px;
+}
+
+tr.language
+{
+  &:hover
+  {
+    background-color:#ccc;
+  }
+}

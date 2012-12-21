@@ -1,0 +1,73 @@
+<div class="block">
+	<div class="title">
+		My account
+	</div>
+	<div class="contents">
+		<p>You have translated <strong><%= current_user.translated_count %></strong> strings!</p>
+		<% if current_user.last_translation_url %>
+			<p class="pickup"><%= link_to "Pick up where you left off!", current_user.last_translation_url %></p>
+		<% end %>
+	</div>
+</div>
+
+<div class="block">
+	<div class="title">
+		Tool Activity
+	</div>
+	<div class="contents">
+		<dl>
+			<dt>Number of users connected:</dt>
+			<dd><%= @online_users.count %></dd>
+		</dl>
+		<% if @admin %>
+			<dl>
+				<dt>Users connected:</dt>
+				<dd>
+					<ul>
+						<% @online_users.each do |user| %>
+							<li><%= user.email %></li>
+						<% end %>
+					</ul>
+				</dd>
+			</dl>
+		<% end %>
+	</div>
+</div>
+
+<div class="block">
+	<div class="title">
+		Translation tool info
+	</div>
+	<div class="contents">
+		<dl>
+			<dt>Number of languages:</dt>
+			<dd><%= Language.count %></dd>
+			<dt>Number of messages in the DB:</dt>
+			<dd><%= Message.count %></dd>
+			<dt>Number of translations in the DB (for all languages and including history):</dt>
+			<dd><%= Translation.count %></dd>
+			<dt>Number of current translations in the DB (for all languages, excluding history):</dt>
+			<dd><%= CurrentTranslation.count %></dd>
+			<dt>Number of users:</dt>
+			<dd><%= User.count %></dd>
+		</dl>
+	</div>
+</div>
+
+<div class="block">
+	<div class="title">
+		Server Info
+	</div>
+	<div class="contents">
+		<dl>
+			<dt>Total number of jobs processed:</dt>
+			<dd><%= @resque_info[:processed] %></dd>
+			<dt>Number of workers:</dt>
+			<dd><%= @resque_info[:workers] %></dd>
+			<dt>Number of pending jobs:</dt>
+			<dd><%= @resque_info[:pending] %></dd>
+			<dt>Number of jobs running:</dt>
+			<dd><%= @resque_info[:working] %></dd>
+		</dl>
+	</div>
+</div>

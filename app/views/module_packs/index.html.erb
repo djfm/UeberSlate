@@ -1,0 +1,37 @@
+<h1>Listing module_packs</h1>
+
+<%= form_tag import_module_module_packs_path, :multipart => true do %>
+<%= label_tag :module_archive %>
+<%= file_field_tag :module_archive %>
+<%= submit_tag "Import!"%>
+<% end %>
+
+<br/>
+
+<table>
+  <tr>
+    <th>Module name</th>
+    <th>Project</th>
+    <th>Pack</th>
+    <th>Archive Path</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @module_packs.each do |module_pack| %>
+  <tr>
+    <td><%= module_pack.module_name %></td>
+    <td><%= module_pack.project.name %></td>
+    <td><%= module_pack.pack.name %></td>
+    <td><%= module_pack.archive_path %></td>
+    <td><%= link_to 'Show', module_pack %></td>
+    <td><%= link_to 'Edit', edit_module_pack_path(module_pack) %></td>
+    <td><%= link_to 'Destroy', module_pack, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Module pack', new_module_pack_path %>

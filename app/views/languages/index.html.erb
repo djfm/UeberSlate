@@ -1,0 +1,11 @@
+<h1>Listing languages</h1>
+
+<%= paginate @languages %>
+
+
+<%= list @languages, :fields => [:code, :locale, :name] %>
+
+
+<br />
+
+<%= link_to 'New Language', new_language_path %>

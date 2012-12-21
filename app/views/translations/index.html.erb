@@ -1,0 +1,29 @@
+<h1>Translations</h1>
+
+<p class="about">
+Here you can import a translation pack (.gzip file) or directly use a PrestaShop archive.
+<br/>
+<strong>Note: </strong>you can upload any file, but only the translations of languages you are authorized to contribute to will be added.
+</p>
+
+<%= form_tag import_translations_path, :multipart => true do %>
+	<p>
+		<%= label_tag :language_archive, "Translation pack" %>
+		<%= file_field_tag :language_archive%>
+	</p>
+	<p>
+		<%= label_tag :source_name %>
+		<%= text_field_tag :source_name %>
+	</p>
+	<p>
+		<%= submit_tag "upload!"%>
+	</p>
+<% end %>
+
+<%= javascript_tag do %>
+$("#source_name").autocomplete({source: <%= @sources.to_json.html_safe %>})
+<% end %>
+
+<%= list @translations, :fields => [:language, :string] %>
+
+<%= link_to 'New Translation', new_translation_path %>

@@ -1,0 +1,9 @@
+<h1>Listing role_white_lists</h1>
+
+<% @role_white_lists.each do |role_white_list| %>
+  <%= row role_white_list, :fields => [:id, :controller, :action, :any_language]%>
+<% end %>
+
+<br />
+
+<%= link_to 'New Role white list', new_role_white_list_path %>

@@ -1,0 +1,19 @@
+<h1>Welcome to channel '<%= @chat.name %>'</h1>
+
+<p class="topic">Current topic is: <%= @chat.topic %></p>
+
+<div id="chat_messages">
+	<% @chat_messages.each do |chat_message| %>
+		<%= render :partial => 'chat_message', :locals => {:chat_message => chat_message} %>
+	<% end %>
+</div>
+
+<div id="chat_input_container">
+	<textarea id="chat_input_message"></textarea>
+</div>
+
+<br/>
+<br/>
+
+<%= link_to 'Edit', edit_chat_path(@chat) %> |
+<%= link_to 'Back', chats_path %>

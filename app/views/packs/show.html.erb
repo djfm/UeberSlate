@@ -1,0 +1,75 @@
+<h1>
+	Showing pack <%= @pack.name %> of project <%= @pack.project.name %>
+</h1>
+
+<p class="about">
+
+Click on any cell to access the translations for the corresponding Language / Category pair.
+<br/>
+Click on <%= image_tag("grind.png", :style=>"width:16px;height:16px;") %> to start an autocompletion job on a pack
+, on <%= image_tag("export.png", :style=>"width:16px;height:16px;") %> to generate the .gzip 
+and one <%= image_tag("download.png", :style=>"width:16px;height:16px;") %> to download the .gzip!
+<br/>
+If the download link is replaced by the <%= image_tag("cloud.png", :style=>"width:16px;height:16px;") %> image it means that the pack has not been exported yet, you must export it before downloading it.
+<br/>
+<br/>
+<strong>Note: </strong>the autocompletion and export tasks can take a while (usually around 5 minutes but more if there are other tasks in the queue).
+<br>They are run in the background, you can leave the page and come back later.
+<br/>
+<br/>
+<strong>Note: </strong>the statistics are updated every 24 hours to minimize server load but you can <%= link_to "refresh them", '?refresh=true' %> if needed.
+</p>
+
+<table class="stats">
+	<thead>
+		<tr>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th>Total</th>
+			<% @categories.each do |category| %>
+				<th><%= category %></th>
+			<% end %>
+		</tr>
+	</thead>
+	<% Language.all.each do |language| %>
+		<tr class="language">
+			<td>
+				<%= language.name %>
+			</td>
+			<td>
+				<%= link_to image_tag('grind.png'), grind_pack_path(@pack, :language_id => language.id), :method => :post %>
+			</td>
+			<td>
+				<%= link_to image_tag('export.png'), export_pack_path(@pack, :language_id => language.id), :method => :post %>
+			</td>
+			<td>
+				<% if export = @pack.exports.find_by_language_id(language.id) %> <%= link_to(image_tag('download.png'), export.url) %> <% else %> <%= image_tag('cloud.png') %> <% end %>
+			</td>
+			<% stats = @stats[language.id] %>
+			<% (["*"] + @categories).each do |category| %>
+				<td class='stat' style='background-color:<%= gradient stats[category].percent_translated, [204,51,51,0.7], [51,204,51,0.7] %>'
+					onclick = 'javascript:window.location="<%= translate_pack_path(@pack, :category => category, :language_id => language.id, :empty => 1) %>";'>
+					
+					<span class='stat'><%= stats[category].percent_translated %>%</span>
+					<br/>
+					<span class="stat_details">(<%= stats[category].translated %>/<%= stats[category].total %>)</span>
+					
+				</td>
+			<% end %>
+		</tr>
+	<% end %>
+	
+	<tr>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th>Total</th>
+		<% @categories.each do |category| %>
+			<th><%= category %></th>
+		<% end %>
+	</tr>
+	
+</table>

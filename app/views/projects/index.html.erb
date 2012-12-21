@@ -1,0 +1,10 @@
+<h1>Listing projects</h1>
+
+
+<%= list @projects, :fields => [:name, :version, :comment]%>
+
+
+
+<br />
+
+<%= link_to 'New Project', new_project_path %>

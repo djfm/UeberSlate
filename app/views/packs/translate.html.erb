@@ -1,0 +1,87 @@
+<h1>Translating '<%= @pack.name %>' into <%= Language.find(params[:language_id]) %></h1>
+
+<fieldset class="jump">
+	<legend>Jump to...</legend>
+	<%= form_tag '', :method => :get, :id => 'change_target' do %>
+		<%= hidden_field_tag :page, params[:page] or 1 %>
+		<%= label_tag :source_language_id, "From " %>
+		<%= select_tag :source_language_id, options_for_select(@langs, params[:source_language_id]) %>
+		<%= label_tag :language_id, "into " %>
+		<%= select_tag :language_id, options_for_select(@langs, params[:language_id]) %>
+		<%= label_tag :category, "translate " %>
+		<%= select_tag :empty, options_for_select([["empty & filled", 2], ["empty only", 1], ["non empty only", 0]], if params[:empty] then params[:empty] else 2 end)%>
+		<%= select_tag :category, options_for_select(@cats, params[:category])%>
+		<%= label_tag :like, "like" %>
+		<%= text_field_tag :like %>
+		and
+		<%= submit_tag "do some work!"%>
+	<% end %>
+</fieldset>
+<br/>
+
+<% if params[:source_language_id] != Language.find_by_code("en").id %>
+<span class="info"><strong>Note: </strong>you chose to translate from <%= srclang = Language.find(params[:source_language_id]) %>, but some strings may still be displayed in English if the corresponding <%= srclang %> translations don't exist. </p>
+<% end %>
+
+<div class = "translations">
+	<% if @classifs and !@classifs.empty? %>
+			<%= paginate @classifs %>
+			<% @classifs.each do |classif|%>
+				<fieldset class = "group">
+					<% unless classif.group.empty? %>
+						<legend class="toggle"><%= classif.group %></legend>
+						<div class='toggle'>
+					<% end %>
+					<% classif.messages.each do |message|%>
+						
+						<div class="clear">
+							<% if message.type == 'HTML'%>
+							<a href='javascript:copyMessageHTMLToTranslation(<%= message.id %>);'> >> Copy html to translation (so you don't have to do the formatting')!</a>
+							<% end %>
+						</div>
+						<div class="message" id="message_<%= message.id %>">							
+							<div class = "string">
+								
+								<% message_string = message.get_string(params[:id], params[:source_language_id]) %>
+								
+								<% if message.type == 'HTML'%>
+									<iframe id="html_<%= message.id %>" srcdoc="<%= message_string %>"></iframe>
+								<% elsif message.type == 'TXT'%>
+									<pre><%= message_string %></pre>
+								<% else %>
+									<%= message_string %>
+								<% end %>
+							</div>
+							<div class="translation" onkeypress="javascript:text_changed(<%= message.id %>)">
+								<textarea id="string_<%= message.id %>" class="translation<% if message.type == 'HTML'%> html_editable<% end %>"><%= if at = message.actual_translation(params[:id], params[:language_id]) then at.string end %></textarea>
+								
+								<div class = "control">
+									<img id="icon_<%= message.id %>" class="icon submit" src="/assets/send.png" onclick="javascript:<% if message.type == 'HTML'%>$('#string_<%= message.id %>').cleditor()[0].updateTextArea();<% end %>post_translation('<%= post_translation_pack_path(params[:id]) %>', <%= message.id %>, '<%= message.key %>', <%= params[:language_id] %>, <%= if at then at.id else "undefined" end %>);"></img>
+								</div>
+							</div>
+						</div>
+					<% end %>
+					<% unless classif.group.empty? %>
+						</div>
+					<% end %>
+				</fieldset>
+			<% end %>
+			<%= paginate @classifs %>
+	<% else %>
+		<p><strong>Hey, there is nothing there! Adjust the filters in the bar above to see something!</strong></p>
+	<% end %>
+</div>
+
+<script type="text/javascript">
+	if($('.html_editable').cleditor({width:600, height: 600}).length > 0)
+	{
+		$('textarea').css('width',556);
+	}
+	$('#source_language_id, #language_id, #category, #empty').change(function(){
+		$('#change_target').submit();
+	});
+	$('div.string').each(function(i,div){
+		$(div).parents('.message').find('textarea').css('height',Math.max(parseInt($(div).css('height')),32));
+	});
+	
+</script>

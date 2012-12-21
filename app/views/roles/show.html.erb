@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Role '<%= @role.name %>'</h1>
+
+<h2>Users in role '<%= @role.name %>'</h2>
+
+<% @functions.each do |function| %>
+	<%= row function, :fields => [:user, :language] %>
+<% end %>
+
+<h2>Add a user to this role</h2>
+
+<%= form_tag functions_path do %>
+	
+	<%= hidden_field_tag :redirect, "#{request.fullpath}" %>
+	<%= hidden_field_tag :role_id, @role.id %>
+
+	<%= label_tag :email %>
+	<%= text_field_tag :email %>
+	<br/>
+	<%= label_tag :language_id, "Language" %>
+	<%= select_tag :language_id, options_for_select(Language.all.map{|language| [language.name, language.id]}) %>
+	<br/>
+	<%= image_submit_tag 'submit.png' %>
+<% end %>
+
+<%= javascript_tag do %>
+	$("#email").autocomplete({source: <%= User.all.map{|u| u.email}.to_json.html_safe %>})
+<% end %>
+
+<h2>Whitelisted actions</h2>
+
+
+<%= list @role.role_white_lists.page(params[:page]), :fields => [:controller, :action, lambda {|r| if r.any_language then {:field => 'Any Language', :class => "any_language"} else {:field => "Language specified for each #{@role.name}", :class => 'not_any_language'} end }] %>
+
+
+<h2>Add a new whitelisted action</h2>
+
+<%= form_for @rwl do |f| %>
+
+		<%= f.hidden_field :role_id %>
+		<%= hidden_field_tag :redirect, "#{request.fullpath}" %>
+	
+		<%= f.label :controller %>
+		<%= f.text_field :controller %>
+		<br/>
+	
+		<%= f.label :action %>
+		<%= f.text_field :action %>
+		<br/>
+	
+		<%= f.label :any_language %>
+		<%= f.check_box :any_language, :class => 'left' %>		
+		<br/>
+		<div class='clear'/>
+		<%= image_submit_tag "submit.png"%>
+<% end %>
+
+<div class="clear">&nbsp;</div>
+
+<!--
+
+<%= link_to 'Edit', edit_role_path(@role) %> |
+<%= link_to 'Back', roles_path %>
+-->

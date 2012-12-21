@@ -1,0 +1,22 @@
+<h1>Language Packs</h1>
+
+<p class="about">
+	Here are the available language packs.
+	<br/>
+	Click on any pack to view its statistics, translate it, export it, or run an autocompletion task on it.
+	<br/>
+	Translations are mutualized between packs: when you translate a string, it gets translated in all packs that have this string!
+</p>
+
+ <%= list @packs, :fields => [:name, :project, :comment] %>
+
+
+<br />
+
+<!--
+<% if pid = params[:project_id] %>
+	<%= link_to 'New Pack For Project', new_project_pack_path(pid) %>
+<% else %>
+	<%= link_to 'New Pack', new_pack_path %>
+<% end %>
+-->

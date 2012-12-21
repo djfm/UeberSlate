@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Key:</b>
+  <%= @translation.key %>
+</p>
+
+<p>
+  <b>Source language:</b>
+  <%= @translation.source_language_id %>
+</p>
+
+<p>
+  <b>Dest language:</b>
+  <%= @translation.dest_language_id %>
+</p>
+
+<p>
+  <b>String:</b>
+  <%= @translation.string %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @translation.user_id %>
+</p>
+
+<p>
+  <b>Reviewer:</b>
+  <%= @translation.reviewer_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_translation_path(@translation) %> |
+<%= link_to 'Back', translations_path %>

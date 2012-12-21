@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>Ueberslate</title>
+	  <%= stylesheet_link_tag    "application", :media => "all" %>
+	  <%= javascript_include_tag "application" %>
+	  <%= csrf_meta_tags %>
+	  <%= javascript_include_tag :defaults, "http://#{request.host}:9292/faye.js" %>
+	  <script type="text/javascript">
+	  
+	  	faye = new Faye.Client('http://<%= request.host %>:9292/faye');
+	  	$(function() {  
+		  <% if current_user %>
+			  faye.subscribe('/users/<%= current_user.channel %>/notifications/new', function (data) {
+			    notify({message: data['message'], severity: data['severity']});
+			  });
+		  <% end %>
+		  
+		});
+	  </script>
+	</head>
+	<body>
+	
+		<div id="header">
+			
+			<div id = "topmenu">
+				
+				<div class="homelink">
+					<%= link_to image_tag("home.png", :class => 'homelink'), "/" %>
+				</div>
+				
+				<div class="toplevelmenuentry-container">
+					<a class="toplevelmenuentry" href="<%= packs_path %>">
+						<div class="toplevelmenuentry-button">
+							<div class="toplevelmenuentry-contained">
+								Translate, etc.!
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="toplevelmenuentry-container">
+					<a class="toplevelmenuentry" href="<%= translations_path %>">
+						<div class="toplevelmenuentry-button">
+							<div class="toplevelmenuentry-contained">
+								Import translations!
+							</div>
+						</div>
+					</a>
+				</div>
+				<!--
+				<div class="toplevelmenuentry-container">
+					<a class="toplevelmenuentry" href="<%= chats_path %>">
+						<div class="toplevelmenuentry-button">
+							<div class="toplevelmenuentry-contained">
+								Chat
+							</div>
+						</div>
+					</a>
+				</div>
+				-->
+			</div>
+			
+			<div id = "notification" class="notice">
+				<div class="table left notification">
+					<div class="table-row">
+						<div class="table-cell">
+							<div id="notification-image"></div>
+						</div>
+					</div>
+				</div>
+				<div class="table left notification">
+					<div class="table-row">
+						<div id="notification-message" class="table-cell">
+							Hey, it works!
+						</div>
+					</div>
+				</div>
+				<div class="table left notification">
+					<div class="table-row">
+						<div id="notification-close" class="table-cell">
+							X
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div id='account'>
+				<% if user_signed_in? %>
+					Welcome, <%= current_user.email %>
+					<%= link_to image_tag('logout.png', :class => 'logout'), destroy_user_session_path, :method=>:delete %>
+				<% else %>
+					You are not <%= link_to "logged in", new_user_session_path %>
+				<% end %>
+			</div>
+			<div class="clear"></div>
+			
+			<!--<div class="notifications" id="notifications"></div>-->
+			<script type="text/javascript">
+				<% flash.each do |severity, message| %>
+					notify({severity: '<%= j severity.to_s %>', message: '<%= j message %>'})
+				<% end %>
+			</script>
+		</div>
+	
+	
+		<div id = "main">
+			<%= yield %>
+		</div>
+	
+	</body>
+</html>

@@ -1,0 +1,17 @@
+<% if objects.respond_to? :current_page %>
+	<%= paginate objects %>
+<% end %>
+
+<div class = "row row-header-container">
+	<% headers.each_with_index do |header, i| %>
+		<div class="<%= classes[i] %> row-contents row-header">
+			<%= header %>
+		</div>
+	<% end %>
+</div>
+
+<div class="clear"></div>
+
+<% objects.each do |object| %>
+	 <%= row object, options %>
+<% end %>

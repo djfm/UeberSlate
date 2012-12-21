@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Module name:</b>
+  <%= @module_pack.module_name %>
+</p>
+
+<p>
+  <b>Project:</b>
+  <%= @module_pack.project_id %>
+</p>
+
+<p>
+  <b>Pack:</b>
+  <%= @module_pack.pack_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_module_pack_path(@module_pack) %> |
+<%= link_to 'Back', module_packs_path %>

@@ -1,0 +1,480 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require vendor
+ *= require_self
+ *= require cleditor/cleditor
+ *= require_tree .
+ *= require jquery.ui.autocomplete
+ */
+
+body
+{
+	font-family:sans-serif;
+	font-size:0.95em;
+	background-image:url(/assets/stripes.png);
+	background-repeat: repeat repeat;
+}
+
+div#header
+{
+  position:fixed;
+  left:0px;
+  top:0px;
+  width:100%;
+  height:50px;
+  background-color:black;
+  border-bottom:1px solid #777;
+}
+
+div#account
+{
+  //background-color:white;
+	float:right;
+	//border:1px solid #ddd;
+	//margin-right:15px;
+	//padding:5px;
+	//width:300px;
+	font-weight:bold;
+	font-size:small;
+	color:#bbb;
+}
+
+img.logout
+{
+  
+}
+
+div.clear
+{
+  clear:both;
+}
+
+div#main
+{
+  padding-top:50px;
+}
+
+table
+{
+  border:0px;
+  border-spacing:0px;
+}
+
+th
+{
+  text-align:left;
+  padding-left:5px;
+  padding-right:5px;
+}
+
+td
+{
+  overflow:hidden;
+  border:0px;
+}
+
+img.icon
+{
+  width:32;
+  height:32;
+}
+
+.icon:hover
+{
+  cursor:pointer;
+}
+
+div#topmenu
+{
+  float:left;
+}
+
+div.toplevelmenuentry-container
+{
+  float:left;
+  display:table;
+}
+
+a.toplevelmenuentry
+{
+  text-decoration:none;
+}
+
+div.toplevelmenuentry-button
+{
+  background-color:#333;
+  color:white;
+  font-weight:bold;
+  /*padding:5px;
+  border-radius:5px;
+  margin-right:5px;*/
+  display:table-row;
+  height:50px;
+  &:hover
+  {
+    background-color:#666;
+  }
+}
+
+div.toplevelmenuentry-contained
+{
+  display:table-cell;
+  vertical-align:middle;
+  padding:5px;
+  border:1px solid black;
+}
+
+div.homelink
+{
+  float:left;
+  background-color:#333;
+  &:hover
+  {
+    background-color:#666;
+  }
+}
+
+img.homelink
+{
+  width:46px;
+  height:46px;
+}
+
+div.toplevelmenuentry-admin-button
+{
+  background-color:#f55;
+}
+
+p.about
+{
+  background-color:rgba(255,255,255,0.5);
+  padding:10px;
+}
+
+.table
+{
+  display:table;
+}
+
+.table-row
+{
+  display:table-row;
+}
+.table-cell
+{
+  display:table-cell;
+}
+
+div.table-cell
+{
+  vertical-align:middle;
+}
+
+div#notification
+{
+  float:left;
+  display:none;
+  background-color:#ccc;
+  margin:5px;
+  border-radius:5px;
+}
+
+div.notification
+{
+   height:40px;
+   padding-left:5px;
+   padding-right:5px;
+}
+
+div#notification-message
+{
+  color:black;
+  width:350px;
+}
+
+div#notification-close
+{
+  color:black;
+  font-weight:bold;
+  &:hover
+  {
+    cursor:pointer;
+  }
+}
+
+div#notification.notice
+{
+  background-color:#eee;
+}
+div#notification.error
+{
+  background-color:orange;
+  
+}
+
+div#notification.error div#notification-message
+{
+  
+}
+
+div#notification-image
+{
+  background-repeat: no-repeat;
+  width: 32px; 
+  height: 32px;
+  margin: 0;
+  padding: 0;
+}
+
+div#notification.notice div#notification-image
+{
+  background-image:url("info.png");
+}
+div#notification.error div#notification-image
+{
+  background-image:url("error.png");
+}
+
+h1
+{
+  display:block;
+  padding:25px;
+  //margin-left:-10px;
+  //margin-right:-10px;
+  border:1px double #bbb;
+  background-color:#fefefe;
+  color:#444;
+}
+
+h2
+{
+  display:block;
+  padding-top:5px;
+  padding-bottom:5px;
+  padding-left:60px;
+  //margin-left:-10px;
+  //margin-right:-10px;
+  border:1px double #bbb;
+  background-color:#fff;
+  color:#666;
+}
+
+.left
+{
+  float:left;
+}
+
+div.input
+{
+  
+  padding:5px;
+}
+
+label
+{
+  //display:block;
+  //float:left;
+  width: 160px;
+}
+
+input[type=text], select
+{
+  width: 160px;
+}
+
+table.notice
+{
+  background-color:#fff;
+}
+
+a.sobre
+{
+  text-decoration:none;
+  &:hover
+  {
+    background-color:inherit;
+    color:inherit;
+  }
+}
+
+span.notification
+{
+  
+}
+
+
+
+
+/*ROW HELPER*/
+
+div.row
+{
+  background-color:white;
+  margin-left:5px;
+  margin-right:5px;
+  margin-bottom:5px;
+  padding:5px;
+  padding-left:15px;
+  border-radius:5px;
+  border:1px solid #bbb;
+  &:hover
+  {
+    background-color:#FFFF99;
+    cursor:pointer;
+  }
+}
+
+div.row-header-container
+{
+  background-color:inherit;
+  border:0px;
+  &:hover
+  {
+    background-color:inherit;
+    cursor:inherit;
+  }
+}
+
+
+
+div.row-controls
+{
+  float:right;
+  height:100%;
+}
+
+div.row-contents
+{
+  float:left;
+  margin-top:2px;
+  padding:3px;
+}
+
+div.row div.row-contents:not(:first-child)
+{
+  margin-right:5px;
+  padding-left:5px;
+  border-left:1px solid #bbb;
+}
+
+div.row div.row-header
+{
+  font-weight:bold;
+  color:black;
+  
+  border-bottom:1px solid black;
+  margin-bottom:5px;
+}
+
+div.row div.row-header:not(:first-child)
+{
+  border-left:0px;
+}
+
+div.edit, div.destroy
+{
+  
+}
+
+div.edit
+{
+  float:left;
+}
+div.destroy
+{
+  float:right;
+}
+
+a:hover
+{
+  cursor:pointer;
+}
+
+
+
+
+
+
+div.role_white_list_controller
+{
+  width:150px;
+  color:green;
+}
+div.role_white_list_action
+{
+  width:150px;
+  color:blue;
+}
+div.role_white_list_any_language
+{
+  font-weight:bold;
+  color:green;
+}
+div.role_white_list_not_any_language
+{
+  font-weight:bold;
+  color:red;
+}
+
+
+
+span.page a, span.next a, span.prev a, span.last a, span.first a
+{
+  text-decoration:none;
+  font-style:none;
+  font-weight:bold;
+  color:black;
+}
+
+nav.pagination
+{
+  margin-left:10px;
+}
+
+
+div.block
+{
+  background-color:rgba(255,255,255,0.4);
+  border:1px solid #ccc;
+  margin:10px;
+}
+
+div.title
+{
+  padding-left:5px;
+  background-color:rgba(200,200,200,0.4);
+  font-weight:bold;
+}
+
+div.contents
+{
+  padding:15px;
+}
+
+div.block dl
+{
+  margin:0px;
+}
+
+legend.toggle
+{
+  &:hover
+  {
+    cursor:pointer;
+  }
+}
+
+span.info
+{
+  background-color:rgba(255,255,255,0.7);
+  padding:4px;
+  border-radius:4px;
+}

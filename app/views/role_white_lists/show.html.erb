@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Role:</b>
+  <%= @role_white_list.role_id %>
+</p>
+
+<p>
+  <b>Action:</b>
+  <%= @role_white_list.action %>
+</p>
+
+
+<%= link_to 'Edit', edit_role_white_list_path(@role_white_list) %> |
+<%= link_to 'Back', role_white_lists_path %>

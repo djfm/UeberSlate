@@ -19,3 +19,5 @@ pickle-email-*.html
 /solr/*
 /config/database.yml
 /config/sunspot.yml
+.project
+ueberslate*.sql

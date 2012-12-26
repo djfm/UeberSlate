@@ -164,6 +164,12 @@ class Pack < ActiveRecord::Base
     plog.end_task
   end
   
+  def build_gzips user_id = nil
+    Language.all.each do |language|
+      build_gzip language.id, user_id
+    end
+  end
+  
   def build_gzip language_id, user_id = nil
 
     files = {}
@@ -186,6 +192,16 @@ class Pack < ActiveRecord::Base
             files[storage_path] = "<?php\n\n#{glob}#{storage.storage_custom} = array();\n\n"
           end
           unless storage_path == "/translations/#{iso}/tabs.php" and (escape_quotes(translation).length >= 32)
+            
+            if storage_path == "/translations/#{iso}/tabs.php"
+              translation.strip!
+              if translation[-1] == ':'
+                translation[-1] = ''
+                translation.strip!
+              end
+              translation[0] = translation[0].upcase
+            end
+            
             files[storage_path] += "#{storage.storage_custom}['#{escape_quotes(storage.message.key)}'] = '#{escape_quotes(translation).gsub(/\r\n|\n/,'\r\n')}';\n"
           end
         elsif storage.storage_method == "FILE"

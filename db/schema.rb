@@ -74,7 +74,6 @@ ActiveRecord::Schema.define(:version => 20121203201113) do
   end
 
   add_index "groupings", ["classification_id"], :name => "index_groupings_on_classification_id"
-  add_index "groupings", ["message_id"], :name => "index_groupings_on_message_id"
 
   create_table "languages", :force => true do |t|
     t.string   "code"

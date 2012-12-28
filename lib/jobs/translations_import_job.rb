@@ -39,11 +39,18 @@ class TranslationsImportJob
           :reviewer_id => nil
         )
         
+        id = t.id
+
         if translation['key'].length >= 255
           Rails.logger.debug "Achtung! Translation key too long!\n#{translation.inspect}."   
         elsif t.save
-          packs.each do |pack|
-            pack.update_current_translation_with t, true
+          if id
+            puts "[#{id}] This is old news, not updating packs."
+          else
+            puts ">> New translation!"
+            packs.each do |pack|
+              pack.update_current_translation_with t, true
+            end
           end
           #puts "Saved translation #{translation['string']}"
         else

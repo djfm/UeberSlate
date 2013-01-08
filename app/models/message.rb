@@ -28,7 +28,7 @@ class Message < ActiveRecord::Base
       csv << ["Email", "Message", "Key", "Language Code", "Translation"]
       Message.includes(:actual_translations).includes(:actual_translations => :language).each do |m|
         m.actual_translations.each do |t|
-          if t.string
+          if t.string and !t.string.strip.empty?
             csv << [t.user.email, m.string, m.key, t.language.code, t.string]
           end
         end

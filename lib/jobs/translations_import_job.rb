@@ -3,6 +3,7 @@ class TranslationsImportJob
   
   def self.perform user_id, source_id, translations
     
+    source = Source.find(source_id)
     #RubyProf.start
     
     plog = Proglogger.new user_id
@@ -44,7 +45,7 @@ class TranslationsImportJob
         if translation['key'].length >= 255
           Rails.logger.debug "Achtung! Translation key too long!\n#{translation.inspect}."   
         elsif t.save
-          if id
+          if id and source.name != "PRIORITARY"
             puts "[#{id}] This is old news, not updating packs."
           else
             puts ">> New translation!"

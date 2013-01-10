@@ -31,13 +31,13 @@ class TranslationsImportJob
       
       
       if authorized_language_ids.empty? or authorized_language_ids.include?(language_id)
-        t = Translation.find_or_initialize_by_key_and_language_id_and_source_id_and_string(
+        t = Translation.find_or_initialize_by_key_and_language_id_and_string(
           translation['key'],
           language_id,
-          source_id,
           translation['string'],
           :user_id => user_id,
-          :reviewer_id => nil
+          :reviewer_id => nil,
+	  :source_id => source_id
         )
         
         id = t.id

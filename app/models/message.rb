@@ -1,3 +1,5 @@
+require 'csv'
+
 class Message < ActiveRecord::Base
   attr_accessible :key, :language_id, :string, :type, :user_id
   
@@ -21,4 +23,17 @@ class Message < ActiveRecord::Base
     if at = actual_translation(pack_id,language_id) then at.string else nil end or self.string
   end
   
+  def self.dump
+    CSV.open 'public/dump.csv', 'w' do |csv|
+      csv << ["Email", "Message", "Key", "Language Code", "Translation"]
+      Message.includes(:actual_translations).includes(:actual_translations => :language).each do |m|
+        m.actual_translations.each do |t|
+          if t.string and !t.string.strip.empty?
+            csv << [t.user.email, m.string, m.key, t.language.code, t.string]
+          end
+        end
+      end
+    end
+  end
+
 end
